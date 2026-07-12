@@ -1,0 +1,38 @@
+# EuroSAT Satellite Image Classifier — Dependencies
+# Install: pip install -r requirements.txt
+# Python 3.9+ recommended
+
+# ── Deep Learning ─────────────────────────────────────────────────────────────
+torch>=2.0.0               # PyTorch — neural network framework
+torchvision>=0.15.0        # Pretrained models (EfficientNet, ResNet) + EuroSAT dataset
+torchaudio>=2.0.0          # Required for some torch installations
+
+# ── Data Science ──────────────────────────────────────────────────────────────
+numpy>=1.24.0              # Numerical arrays
+pandas>=2.0.0              # DataFrames for metrics aggregation
+scipy>=1.11.0              # Scientific utilities
+
+# ── Visualisation ─────────────────────────────────────────────────────────────
+matplotlib>=3.7.0          # Plotting (loss curves, confusion matrix)
+seaborn>=0.12.0            # Statistical visualisation (heatmaps)
+plotly>=5.18.0             # Interactive charts in Streamlit dashboard
+Pillow>=10.0.0             # Image loading and preprocessing
+
+# ── Web Dashboard ─────────────────────────────────────────────────────────────
+streamlit>=1.32.0          # Interactive web application
+watchdog>=3.0.0            # Streamlit file watcher (optional but recommended)
+
+# ── Utilities ─────────────────────────────────────────────────────────────────
+tqdm>=4.66.0               # Progress bars
+scikit-learn>=1.3.0        # Evaluation metrics (sklearn.metrics)
+opencv-python-headless>=4.8.0  # Image processing (optional, for advanced preprocessing)
+
+# ── Optional: Vision Transformer support ──────────────────────────────────────
+# timm>=0.9.0              # Uncomment for ViT-Tiny architecture support
+
+# ── Optional: Tensorboard logging ─────────────────────────────────────────────
+# tensorboard>=2.15.0      # Uncomment for training curve logging
+
+# ── Development ───────────────────────────────────────────────────────────────
+pytest>=7.4.0              # Unit tests
+black>=23.0.0              # Code formatting (optional)
