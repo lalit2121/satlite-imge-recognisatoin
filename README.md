@@ -19,7 +19,7 @@ This project demonstrates a complete ML pipeline: data loading, training (two‑
 | **Macro F1** | 93.47% |
 | **Weighted F1** | 93.51% |
 | **Macro Recall** | 93.46% |
-| **Training Time** (5 epochs) | ~1.1 hours (CPU) |
+| **Training Time** (5 epochs) | ~8.1 hours (CPU) |
 
 > The model was trained with EfficientNet‑B0 for only 5 epochs (warmup + fine‑tuning) and achieves state‑of‑the‑art performance on the EuroSAT benchmark.
 
@@ -249,38 +249,6 @@ The model performs well across all classes. Most confusion occurs between visual
 
 ---
 
-## 🛠️ Configuration Guide
-
-All settings live in `config.py`. Key hyperparameters:
-
-```python
-MODEL_CONFIG = {
-    "model_name": "efficientnet_b0",  # Architecture
-    "num_classes": 10,                 # EuroSAT classes
-    "dropout": 0.3,                    # Regularization
-    "pretrained": True,                # Use ImageNet weights
-}
-
-TRAINING_CONFIG = {
-    "warmup_epochs": 5,       # Phase 1: head-only training
-    "num_epochs": 30,         # Total epochs
-    "warmup_lr": 1e-4,        # Phase 1 learning rate
-    "finetune_lr": 1e-5,      # Phase 2 learning rate
-    "batch_size": 32,         # Images per batch
-    "optimizer": "adamw",     # Adam with proper weight decay
-    "weight_decay": 1e-5,     # L2 regularization
-    "label_smoothing": 0.1,   # Soft targets
-    "early_stopping_patience": 7,
-}
-```
-
-**Presets available:**
-- `PRESET_FAST` — Quick experiments (15 epochs, MobileNetV3)
-- `PRESET_BEST` — Maximum accuracy (50 epochs, aggressive tuning)
-- `PRESET_COMPARISON` — For benchmarking multiple architectures
-
----
-
 ## 🔄 Architecture Comparison
 
 | Model | Parameters | Expected Val Acc | CPU Train Time | Best For |
@@ -316,82 +284,6 @@ gradcam.remove_hooks()  # Always clean up!
 
 ---
 
-## 🧪 Running Tests
-
-```bash
-python test_model.py
-```
-
-Tests cover:
-- Transform shapes and denormalization
-- Model output shapes for all architectures
-- Freeze/unfreeze backbone
-- Save/load checkpoint consistency
-- Probability sums to 1.0
-
----
-
-## 📦 Dependencies
-
-- Python ≥ 3.9
-- PyTorch ≥ 2.0
-- torchvision ≥ 0.15
-- streamlit ≥ 1.32
-- matplotlib ≥ 3.7
-- seaborn ≥ 0.12
-- numpy ≥ 1.24
-- Pillow ≥ 10.0
-- scikit-learn ≥ 1.3
-- tqdm ≥ 4.66
-- rasterio (optional, for GeoTIFF support)
-- timm (optional, for ViT-Tiny)
-
-Install all with:
-```bash
-pip install -r requirements.txt
-```
-
----
-
-## 🗺️ File Dependency Graph
-
-```
-config.py ◄──────────┐
-       │             │
-eurosat_dataset.py    │
-       │             │
-classifier.py ◄──────┘
-       │
-       ├──► train.py ──► results/models/*.pth
-       │                    results/metrics/*.json
-       │
-       ├──► evaluate.py ──► results/metrics/eval*.json
-       │
-       ├──► gradcam.py
-       │
-       └──► plot_results.py
-                │
-                ▼
-            app.py (Streamlit dashboard)
-```
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Feel free to open issues or submit pull requests for:
-- New architectures
-- Additional evaluation metrics
-- Enhanced visualisations
-- Support for other datasets
-
----
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
-
----
 
 ## 📚 References
 
@@ -401,24 +293,6 @@ Distributed under the MIT License. See `LICENSE` for more information.
 4. **He et al. (2016).** *Deep Residual Learning for Image Recognition.* CVPR.
 5. **Howard et al. (2019).** *Searching for MobileNetV3.* ICCV.
 
----
 
-## 🖼️ Screenshots
-
-| Image Classifier | Training Curves |
-|------------------|-----------------|
-| ![Classifier](screenshots/classifier.png) | ![Curves](screenshots/curves.png) |
-| **Confusion Matrix** | **Grad-CAM** |
-| ![CM](screenshots/cm.png) | ![GradCAM](screenshots/gradcam.png) |
-
-*(Replace with actual screenshots once you capture them from the dashboard.)*
-
----
-
-## ✨ Acknowledgments
-
-This project was developed as part of a Master's in Space Engineering — Machine Learning Portfolio. Special thanks to the open-source community for the incredible tools.
-
----
 
 **Happy classifying! 🚀**
