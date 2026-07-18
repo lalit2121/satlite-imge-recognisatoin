@@ -2,6 +2,8 @@
 
 ## Preview 
 ![Preview](poster_satml.png)
+## Preview 
+![Preview](satml.gif)
 
 
 
